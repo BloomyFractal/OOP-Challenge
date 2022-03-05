@@ -10,6 +10,7 @@
 *.collabignore text eol=lf
 *.collabattributes text eol=lf
 *.md text eol=lf
+*.unity text eol=lf
 *.uxml text eol=lf
 *.uss text eol=lf
 *.json text eol=lf
