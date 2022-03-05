@@ -12,3 +12,4 @@
 *.md text eol=lf
 *.uxml text eol=lf
 *.uss text eol=lf
+*.json text eol=lf
