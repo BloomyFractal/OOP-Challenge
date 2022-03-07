@@ -60,7 +60,22 @@ public class TitleUI : MonoBehaviour
         Application.Quit();
        #endif
      }
+    }
 
+    //Click Functions
+    //Start
+    public void GoToEnterScene()
+    {
+      SceneManager.LoadScene("EnterName");
+    }
 
+    //Quit
+    public void ExitGame()
+    {
+      #if UNITY_EDITOR
+       EditorApplication.ExitPlaymode();
+      #else
+       Application.Quit();
+      #endif
     }
 }
