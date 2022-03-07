@@ -9,7 +9,8 @@ using UnityEditor;
 public class TitleUI : MonoBehaviour
 {
   //Arrow variables
-  public Transform navArrow;
+  private Transform navArrow;
+  private Vector3 arrowMove = new Vector3(0,0.7f,0);
 
   //Positions close to Title buttons
   private Vector3 arrowFacesStart = new Vector3(1.1f,2f,0);
@@ -17,10 +18,9 @@ public class TitleUI : MonoBehaviour
   private Vector3 arrowFacesOptions = new Vector3(1.1f,0.6f,0);
   private Vector3 arrowFacesQuit = new Vector3(1.1f,-0.1f,0);
 
-  private Vector3 arrowMove = new Vector3(0,0.7f,0);
-
     void Start()
     {
+     navArrow = GameObject.Find("NavigationArrow").GetComponent<Transform>();
      navArrow.position = arrowFacesStart;
     }
 
@@ -52,7 +52,7 @@ public class TitleUI : MonoBehaviour
      }
 
      //Quit game
-     if (navArrow.position.y == arrowFacesQuit.y && Input.GetKeyDown(KeyCode.Return))
+     if ((navArrow.position.y <= arrowFacesQuit.y + 1 || navArrow.position.y >= arrowFacesQuit.y - 1) && Input.GetKeyDown(KeyCode.Return))
      {
        #if UNITY_EDITOR
         EditorApplication.ExitPlaymode();
