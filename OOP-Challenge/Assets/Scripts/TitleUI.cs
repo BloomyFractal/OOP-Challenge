@@ -51,8 +51,20 @@ public class TitleUI : MonoBehaviour
        SceneManager.LoadScene("EnterName");
      }
 
+     //Go to How To Play Scene
+     if (navArrow.position.y == arrowFacesHowToPlay.y && Input.GetKeyDown(KeyCode.Return))
+     {
+       SceneManager.LoadScene("HowToPlayTest");
+     }
+
+     //Go to Options Scene
+     if ((navArrow.position.y <= arrowFacesOptions.y + 0.1 && Input.GetKeyDown(KeyCode.Return)) || (navArrow.position.y >= arrowFacesOptions.y - 0.1 && Input.GetKeyDown(KeyCode.Return)))
+     {
+       SceneManager.LoadScene("Options");
+     }
+
      //Quit game
-     if ((navArrow.position.y <= arrowFacesQuit.y + 1 || navArrow.position.y >= arrowFacesQuit.y - 1) && Input.GetKeyDown(KeyCode.Return))
+     if ((navArrow.position.y <= arrowFacesQuit.y + 0.1 && Input.GetKeyDown(KeyCode.Return)) || (navArrow.position.y >= arrowFacesQuit.y - 0.1 && Input.GetKeyDown(KeyCode.Return)))
      {
        #if UNITY_EDITOR
         EditorApplication.ExitPlaymode();
