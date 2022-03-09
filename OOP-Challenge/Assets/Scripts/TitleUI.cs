@@ -10,13 +10,13 @@ public class TitleUI : MonoBehaviour
 {
   //Arrow variables
   private Transform navArrow;
-  private Vector3 arrowMove = new Vector3(0,0.7f,0);
+  private Vector3 arrowMove = new Vector3(0,0.5f,0);
 
   //Positions close to Title buttons
   private Vector3 arrowFacesStart = new Vector3(1.1f,2f,0);
-  private Vector3 arrowFacesHowToPlay = new Vector3(1.1f,1.3f,0);
-  private Vector3 arrowFacesOptions = new Vector3(1.1f,0.6f,0);
-  private Vector3 arrowFacesQuit = new Vector3(1.1f,-0.1f,0);
+  private Vector3 arrowFacesHowToPlay = new Vector3(1.1f,1.5f,0);
+  private Vector3 arrowFacesOptions = new Vector3(1.1f,1f,0);
+  private Vector3 arrowFacesQuit = new Vector3(1.1f,0.5f,0);
 
     void Start()
     {
@@ -58,13 +58,13 @@ public class TitleUI : MonoBehaviour
      }
 
      //Go to Options Scene
-     if ((navArrow.position.y <= arrowFacesOptions.y + 0.1 && Input.GetKeyDown(KeyCode.Return)) || (navArrow.position.y >= arrowFacesOptions.y - 0.1 && Input.GetKeyDown(KeyCode.Return)))
+     if (navArrow.position.y == arrowFacesOptions.y && Input.GetKeyDown(KeyCode.Return))
      {
        SceneManager.LoadScene("Options");
      }
 
      //Quit game
-     if ((navArrow.position.y <= arrowFacesQuit.y + 0.1 && Input.GetKeyDown(KeyCode.Return)) || (navArrow.position.y >= arrowFacesQuit.y - 0.1 && Input.GetKeyDown(KeyCode.Return)))
+     if (navArrow.position.y == arrowFacesQuit.y && Input.GetKeyDown(KeyCode.Return))
      {
        #if UNITY_EDITOR
         EditorApplication.ExitPlaymode();
