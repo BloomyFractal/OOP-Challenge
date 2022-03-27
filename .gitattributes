@@ -14,3 +14,4 @@
 *.uxml text eol=lf
 *.uss text eol=lf
 *.json text eol=lf
+*.inputactions text eol=lf

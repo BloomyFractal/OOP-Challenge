@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DataPersists : MonoBehaviour
 {
-  public static DataPersists dataPersists;
+  public DataPersists dataPersists;
 
   public float difficulty;
 
