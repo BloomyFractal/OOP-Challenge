@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DataPersists : MonoBehaviour
 {
+  //Reference for other scripts
   public DataPersists dataPersists;
 
   public float difficulty;
