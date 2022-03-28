@@ -60,4 +60,11 @@ public class HowToPlayUI : MonoBehaviour
        SceneManager.LoadScene("TitleScreen");
      }
     }
+
+    //Click functions
+    //Return to Title Screen
+    public void TitleScreen()
+    {
+     SceneManager.LoadScene("TitleScreen");  
+    }
 }
