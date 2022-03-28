@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.InputSystem;
 
 public class OptionsUI : MonoBehaviour
 {
@@ -86,20 +85,23 @@ public class OptionsUI : MonoBehaviour
 
      // ↓ PROBLEM HERE ↓
 
-     //Change difficulty
-     if (navArrow.position.y == arrowFacesEasy.y && Input.GetKeyDown(KeyCode.Return))
+     //Amount of vertical space between any two given buttons
+     float verticalButtonGap = Mathf.Abs(arrowFacesEasy.y - arrowFacesNormal.y);
+
+     //Change difficulty if Return is pressed around 10% of the button's Y coor.
+     if (navArrow.position.y < arrowFacesEasy.y + (verticalButtonGap * 0.10f) && navArrow.position.y > arrowFacesEasy.y - (verticalButtonGap * 0.10f) && Input.GetKeyDown(KeyCode.Return))
      {
       dataPersists.difficulty = 0.5f;
       Debug.Log("difficulty = " + dataPersists.difficulty + ".");
      }
 
-     else if (navArrow.position.y == arrowFacesNormal.y && Input.GetKeyDown(KeyCode.Return))
+     else if ((navArrow.position.y < arrowFacesNormal.y + (verticalButtonGap * 0.10f) && navArrow.position.y > arrowFacesNormal.y - (verticalButtonGap * 0.10f) && Input.GetKeyDown(KeyCode.Return)))
      {
       dataPersists.difficulty = 1;
       Debug.Log("difficulty = " + dataPersists.difficulty + ".");
      }
 
-     else if (navArrow.position.y == arrowFacesHard.y && Input.GetKeyDown(KeyCode.Return))
+     else if ((navArrow.position.y < arrowFacesHard.y + (verticalButtonGap * 0.10f) && navArrow.position.y > arrowFacesHard.y - (verticalButtonGap * 0.10f) && Input.GetKeyDown(KeyCode.Return)))
      {
       dataPersists.difficulty = 1.5f;
       Debug.Log("difficulty = " + dataPersists.difficulty + ".");
