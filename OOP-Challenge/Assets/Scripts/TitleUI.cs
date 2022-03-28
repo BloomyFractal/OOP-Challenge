@@ -54,7 +54,7 @@ public class TitleUI : MonoBehaviour
      //Go to How To Play Scene
      if (navArrow.position.y == arrowFacesHowToPlay.y && Input.GetKeyDown(KeyCode.Return))
      {
-       SceneManager.LoadScene("HowToPlayTest");
+       SceneManager.LoadScene("HowToPlay");
      }
 
      //Go to Options Scene
@@ -79,6 +79,18 @@ public class TitleUI : MonoBehaviour
     public void GoToEnterScene()
     {
       SceneManager.LoadScene("EnterName");
+    }
+
+    //How to play
+    public void GoToHowToPlay()
+    {
+      SceneManager.LoadScene("HowToPlay");
+    }
+
+    //Options
+    public void OptionsScene()
+    {
+      SceneManager.LoadScene("Options");
     }
 
     //Quit

@@ -122,4 +122,32 @@ public class OptionsUI : MonoBehaviour
        navArrow.position = arrowFacesDiff;
      }
     }
+
+    //Click functions
+    //Set Easy modo
+    public void EasyModo()
+    {
+      dataPersists.difficulty = 0.5f;
+      Debug.Log("difficulty = " + dataPersists.difficulty + ".");
+    }
+
+    //Set Normal Mode
+    public void NormalMode()
+    {
+      dataPersists.difficulty = 1;
+      Debug.Log("difficulty = " + dataPersists.difficulty + ".");
+    }
+
+    //Set Hard Mode
+    public void HardMode()
+    {
+      dataPersists.difficulty = 1.5f;
+      Debug.Log("difficulty = " + dataPersists.difficulty + ".");
+    }
+
+    //Back to Title Screen
+    public void TitleScreen()
+    {
+      SceneManager.LoadScene("TitleScreen");
+    }
 }
