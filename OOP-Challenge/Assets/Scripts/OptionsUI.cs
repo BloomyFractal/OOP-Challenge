@@ -14,9 +14,9 @@ public class OptionsUI : MonoBehaviour
   private Vector3 arrowFacesBack = new Vector3(8,-4,0);
 
   //Arrow positions within Difficulty Panel
-  private Vector3 arrowFacesEasy = new Vector3(1,5,0);
-  private Vector3 arrowFacesNormal = new Vector3(1,4,0);
-  private Vector3 arrowFacesHard = new Vector3(1,3,0);
+  private Vector3 arrowFacesEasy = new Vector3(1.3f,5,0);
+  private Vector3 arrowFacesNormal = new Vector3(1.3f,4,0);
+  private Vector3 arrowFacesHard = new Vector3(1.3f,3,0);
 
   private Vector3 arrowMoveDifficulties = new Vector3(0,1,0);
 
@@ -66,8 +66,6 @@ public class OptionsUI : MonoBehaviour
        navArrow.position = arrowFacesNormal;
      }
 
-     //In the game, the Easy button is highest, Normal is in between and Hard is lowest.
-
      //Navigate within Difficulty Panel
      //Go upward
      if (navArrow.position.x != arrowFacesDiff.x && navArrow.position.y < arrowFacesEasy.y - 0.1f && Input.GetKeyDown(KeyCode.UpArrow))
@@ -82,8 +80,6 @@ public class OptionsUI : MonoBehaviour
       navArrow.position -= arrowMoveDifficulties;
       Debug.Log("navArrow.position = " + navArrow.position + ".");
      }
-
-     // ↓ PROBLEM HERE ↓
 
      //Amount of vertical space between any two given buttons
      float verticalButtonGap = Mathf.Abs(arrowFacesEasy.y - arrowFacesNormal.y);
@@ -105,6 +101,25 @@ public class OptionsUI : MonoBehaviour
      {
       dataPersists.difficulty = 1.5f;
       Debug.Log("difficulty = " + dataPersists.difficulty + ".");
+     }
+
+     //Return to Panel Choice
+     //From Easy modo
+     if (navArrow.position.y < arrowFacesEasy.y + (verticalButtonGap * 0.10f) && navArrow.position.y > arrowFacesEasy.y - (verticalButtonGap * 0.10f) && Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Backspace))
+     {
+       navArrow.position = arrowFacesDiff;
+     }
+
+     //From Normal mode
+     if (navArrow.position.y < arrowFacesNormal.y + (verticalButtonGap * 0.10f) && navArrow.position.y > arrowFacesNormal.y - (verticalButtonGap * 0.10f) && Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Backspace))
+     {
+       navArrow.position = arrowFacesDiff;
+     }
+
+     //From Hard mode
+     if (navArrow.position.y < arrowFacesHard.y + (verticalButtonGap * 0.10f) && navArrow.position.y > arrowFacesHard.y - (verticalButtonGap * 0.10f) && Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Backspace))
+     {
+       navArrow.position = arrowFacesDiff;
      }
     }
 }
