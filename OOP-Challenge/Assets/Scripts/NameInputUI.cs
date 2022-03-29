@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class NameInputUI : MonoBehaviour
 {
@@ -12,12 +13,17 @@ public class NameInputUI : MonoBehaviour
   private Vector3 arrowFacesSubmit = new Vector3(1.2f,1,0);
   private Vector3 arrowFacesBack = new Vector3(4.4f,-1.7f,0);
 
-
+  //Script communication
+  private DataPersists dataPersists;
 
     void Start()
     {
+     //Arrow
      navArrow = GameObject.Find("NavigationArrow").GetComponent<Transform>();
      navArrow.position = arrowFacesSubmit;
+
+     //Data
+     dataPersists = GameObject.Find("Data").GetComponent<DataPersists>();
     }
 
 
@@ -44,6 +50,13 @@ public class NameInputUI : MonoBehaviour
      {
        SceneManager.LoadScene("TitleScreen");
      }
+
+     //Register Name and Go to Level Scene
+     if (navArrow.position == arrowFacesSubmit && Input.GetKeyDown(KeyCode.Return))
+     {
+      dataPersists.SetPlayerName();
+     }
+
 
     }
 }

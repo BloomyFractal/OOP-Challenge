@@ -1678,6 +1678,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dataPersists: {fileID: 0}
+  inputField: {fileID: 0}
+  playerName: 
+  bestScorePlayer: 
+  bestScoreText: {fileID: 0}
+  highScore: 0
   difficulty: 0
 --- !u!1 &2014192007
 GameObject:
