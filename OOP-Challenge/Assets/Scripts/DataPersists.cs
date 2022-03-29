@@ -12,8 +12,7 @@ public class DataPersists : MonoBehaviour
   private static TMP_InputField inputField;
 
   //Level UI variables
-  public string playerName;//The one set in EnterName
-  private TextMeshProUGUI playerNameDisplay;//The one in Level
+  public string playerName;
 
   public string highScorePlayer;//The one saved in JSON
   private TextMeshProUGUI highScorePlayerText;//The JSON name displayed in Level
@@ -42,7 +41,7 @@ public class DataPersists : MonoBehaviour
 
     void Start()
     {
-
+     difficulty = 1;
     }
 
     void Update()
@@ -52,15 +51,9 @@ public class DataPersists : MonoBehaviour
       {
        inputField = GameObject.Find("NameField").GetComponent<TMP_InputField>();
       }
-
       //Level definitions
       if (SceneManager.GetActiveScene().name == "Level")
       {
-       //Player definitions
-       playerNameDisplay = GameObject.Find("playerName").GetComponent<TextMeshProUGUI>();
-
-       playerNameDisplay.text = playerName;
-
        //High Score definitions
        highScoreNumText = GameObject.Find("HighScore").GetComponent<TextMeshProUGUI>();
 
