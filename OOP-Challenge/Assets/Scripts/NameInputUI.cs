@@ -56,7 +56,19 @@ public class NameInputUI : MonoBehaviour
      {
       dataPersists.SetPlayerName();
      }
+    }
 
+    //Click Functions
 
+    //Back to Title Screen
+    public void TitleScreen()
+    {
+     SceneManager.LoadScene("TitleScreen");
+    }
+
+    //Register Name and Go to Level Scene
+    public void LevelScene()
+    {
+     dataPersists.SetPlayerName();
     }
 }
