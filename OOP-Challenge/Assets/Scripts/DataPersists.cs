@@ -11,6 +11,11 @@ public class DataPersists : MonoBehaviour
 
   private static TMP_InputField inputField;
 
+  //EnterName UI variables
+  private int nameLength;
+  private TextMeshProUGUI nameLengthText;
+
+
   //Level UI variables
   public string playerName;
 
@@ -50,6 +55,14 @@ public class DataPersists : MonoBehaviour
       if (SceneManager.GetActiveScene().name == "EnterName")
       {
        inputField = GameObject.Find("NameField").GetComponent<TMP_InputField>();
+
+       nameLengthText = GameObject.Find("NameLength").GetComponent<TextMeshProUGUI>();
+
+       //Check for name Length
+       nameLength = inputField.text.Length;
+
+       nameLengthText.text = "Name length: " + nameLength;
+
       }
       //Level definitions
       if (SceneManager.GetActiveScene().name == "Level")
@@ -65,6 +78,7 @@ public class DataPersists : MonoBehaviour
     {
       playerName = inputField.text;
       Debug.Log("playerName = " + playerName + "." );
+      Debug.Log("nameLength = " + nameLength + "." );
       SceneManager.LoadScene("Level");
     }
 }

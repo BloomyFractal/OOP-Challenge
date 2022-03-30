@@ -35,18 +35,18 @@ public class NameInputUI : MonoBehaviour
     public void ArrowFunctions()
     {
      //Navigate between Submit and Back
-     if (navArrow.position == arrowFacesSubmit && Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.LeftArrow))
+     if (navArrow.position == arrowFacesSubmit && Input.GetKeyDown(KeyCode.DownArrow))
      {
        navArrow.position = arrowFacesBack;
      }
 
-     if (navArrow.position == arrowFacesBack && Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.RightArrow))
+     if (navArrow.position == arrowFacesBack && Input.GetKeyDown(KeyCode.UpArrow))
      {
        navArrow.position = arrowFacesSubmit;
      }
 
      //Return to Title Screen
-     if (navArrow.position == arrowFacesBack && Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Backspace))
+     if (navArrow.position == arrowFacesBack && Input.GetKeyDown(KeyCode.Escape))
      {
        SceneManager.LoadScene("TitleScreen");
      }
