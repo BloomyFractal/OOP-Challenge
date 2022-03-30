@@ -52,7 +52,7 @@ public class NameInputUI : MonoBehaviour
      }
 
      //Register Name and Go to Level Scene
-     if (navArrow.position == arrowFacesSubmit && Input.GetKeyDown(KeyCode.Return))
+     if (DataPersists.inputField.text.Length >= 2 && DataPersists.inputField.text.Length <= 14 && navArrow.position == arrowFacesSubmit && Input.GetKeyDown(KeyCode.Return))
      {
       dataPersists.SetPlayerName();
      }
@@ -69,6 +69,10 @@ public class NameInputUI : MonoBehaviour
     //Register Name and Go to Level Scene
     public void LevelScene()
     {
-     dataPersists.SetPlayerName();
+     if (DataPersists.inputField.text.Length >= 2 && DataPersists.inputField.text.Length <= 14)
+     {
+       dataPersists.SetPlayerName();
+     }
+
     }
 }
