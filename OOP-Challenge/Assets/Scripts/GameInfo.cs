@@ -18,12 +18,14 @@ public class GameInfo : MonoBehaviour
 
   //Script communication
   private DataPersists dataPersists;
+  private Hero hero;
 
     void Start()
     {
 
-     //Data Reference
+     //Scripts Reference
      dataPersists = GameObject.Find("Data").GetComponent<DataPersists>();
+     hero = GameObject.Find("Hero").GetComponent<Hero>();
 
      //Define Time variables
      time = 100;
@@ -49,6 +51,13 @@ public class GameInfo : MonoBehaviour
 
      //Display Score
      scoreText.text = "Score: " + score.ToString("0 000 000");
+
+     //Kill hero if time runs out
+     if (time <= 0)
+     {
+       hero.lifeNum = 0;
+       Debug.Log("lifeNum = " + hero.lifeNum + ".");
+     }
 
     }
 }
