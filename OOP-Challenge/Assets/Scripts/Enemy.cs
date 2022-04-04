@@ -27,10 +27,9 @@ public class Enemy : MonoBehaviour
 
     }
 
-    public virtual void showDist()
+    public virtual void defineDist()
     {
      yDist = heroTrans.position.y - enemyTrans.position.y;
-     Debug.Log("yDist = " + yDist + ".");
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -45,6 +44,9 @@ public class Enemy : MonoBehaviour
         StartCoroutine(removeEnemy());
         Debug.Log("The enemy shall be destroyed.");
         gameInfo.score += 1000;
+
+        //Make hero bounce on enemy
+        hero.heroRb.AddForce(Vector3.up * hero.jumpForce/2,ForceMode.Impulse);
       }
     }
 

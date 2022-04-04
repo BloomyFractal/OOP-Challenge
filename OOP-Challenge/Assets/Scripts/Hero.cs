@@ -8,9 +8,9 @@ public class Hero : MonoBehaviour
   private float horiInput;
 
   //Hero variables
-  private Rigidbody heroRb;
-  private int speed = 800;
-  private int jumpForce = 10;
+  public Rigidbody heroRb;
+  private int speed = 600;
+  public int jumpForce = 10;
   public bool isJumping;
 
   //Life variables
@@ -23,7 +23,7 @@ public class Hero : MonoBehaviour
   private GameInfo gameInfo;
 
   //Physics variables
-  private float gravityModifier = 2f;
+  private float gravityModifier = 1.7f;
 
     void Start()
     {
@@ -31,7 +31,6 @@ public class Hero : MonoBehaviour
      lives = GameObject.FindGameObjectsWithTag("Life");
 
      Physics.gravity *= gravityModifier;
-     heroRb = GetComponent<Rigidbody>();
     }
 
     void Update()
