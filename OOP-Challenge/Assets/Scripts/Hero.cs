@@ -21,6 +21,7 @@ public class Hero : MonoBehaviour
 
   //Script communication
   private GameInfo gameInfo;
+  public Enemy enemy;
 
   //Physics variables
   private float gravityModifier = 1.7f;
@@ -75,7 +76,7 @@ public class Hero : MonoBehaviour
         Debug.Log("isJumping = " + isJumping + ".");
       }
 
-      //Hero loses a life if it touches an enemy without being above it
+      //Hero loses a life if it touches a living enemy without being above it
       if (collision.gameObject.tag == "Enemy" && lifeNum > 0 && !isJumping)
       {
        lives[i-1].gameObject.SetActive(false);

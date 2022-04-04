@@ -39,11 +39,18 @@ public class Enemy : MonoBehaviour
       Debug.Log("hero.isJumping IS " + hero.isJumping + ".");
 
       //Defeat enemy by jumping on it and gain score
-      if (collision.gameObject.tag == "Hero" && yDist > 0.1f && hero.isJumping)
+      if (collision.gameObject.tag == "Hero" && yDist > 0.1f && hero.isJumping && enemyTrans.localScale.y > 0.25f)
       {
         StartCoroutine(removeEnemy());
         Debug.Log("The enemy shall be destroyed.");
         gameInfo.score += 1000;
+
+        gameObject.tag = "DeadEnemy";
+        Debug.Log("gameObject.tag = " + gameObject.tag + ".");
+
+        //Make enemy smaller once jumped on
+        Vector3 scaleChange = new Vector3(0,0.25f,0);
+        enemyTrans.localScale -= scaleChange;
 
         //Make hero bounce on enemy
         hero.heroRb.AddForce(Vector3.up * hero.jumpForce/2,ForceMode.Impulse);
@@ -52,7 +59,7 @@ public class Enemy : MonoBehaviour
 
     IEnumerator removeEnemy()
     {
-      yield return new WaitForSeconds(3);
+      yield return new WaitForSeconds(20);
       gameObject.SetActive(false);
     }
 }
