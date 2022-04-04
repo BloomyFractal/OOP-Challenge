@@ -1987,3 +1987,4 @@ MonoBehaviour:
   heroTrans: {fileID: 1216170181}
   yDist: 0
   hero: {fileID: 1216170182}
+  gameInfo: {fileID: 707133885}

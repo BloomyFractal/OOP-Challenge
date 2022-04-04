@@ -15,11 +15,11 @@ public class Enemy : MonoBehaviour
 
   //Script communication
   public Hero hero;
-  private GameInfo gameInfo;
+  public GameInfo gameInfo;
 
     void Start()
     {
-     gameInfo = GameObject.Find("Canvas").GetComponent<GameInfo>();
+
     }
 
     void Update()

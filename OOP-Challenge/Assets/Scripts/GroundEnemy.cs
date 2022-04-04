@@ -11,6 +11,6 @@ public class GroundEnemy : Enemy
 
     void Update()
     {
-     //showDist();
+     showDist();
     }
 }
