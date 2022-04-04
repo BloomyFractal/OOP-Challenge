@@ -9,8 +9,8 @@ public class Hero : MonoBehaviour
 
   //Hero variables
   private Rigidbody heroRb;
-  private int speed = 400;
-  private int jumpForce = 500;
+  private int speed = 800;
+  private int jumpForce = 10;
   public bool isJumping;
 
   //Life variables
@@ -22,11 +22,15 @@ public class Hero : MonoBehaviour
   //Script communication
   private GameInfo gameInfo;
 
+  //Physics variables
+  private float gravityModifier = 2f;
+
     void Start()
     {
      lifeNum = 5;
      lives = GameObject.FindGameObjectsWithTag("Life");
 
+     Physics.gravity *= gravityModifier;
      heroRb = GetComponent<Rigidbody>();
     }
 
@@ -46,7 +50,7 @@ public class Hero : MonoBehaviour
      //Make player jump only when on the ground
      if (Input.GetKeyDown(KeyCode.Space) && !isJumping)
      {
-       heroRb.AddForce(Vector3.up * jumpForce * Time.deltaTime,ForceMode.Impulse);
+       heroRb.AddForce(Vector3.up * jumpForce,ForceMode.Impulse);
 
        isJumping = true;
        Debug.Log("isJumping = " + isJumping + ".");
