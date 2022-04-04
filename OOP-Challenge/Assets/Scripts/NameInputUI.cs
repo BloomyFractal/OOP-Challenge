@@ -46,7 +46,7 @@ public class NameInputUI : MonoBehaviour
      }
 
      //Return to Title Screen
-     if (navArrow.position == arrowFacesBack && Input.GetKeyDown(KeyCode.Escape))
+     if (navArrow.position == arrowFacesBack && Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Return))
      {
        SceneManager.LoadScene("TitleScreen");
      }

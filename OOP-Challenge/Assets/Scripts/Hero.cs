@@ -9,21 +9,24 @@ public class Hero : MonoBehaviour
 
   //Hero variables
   private Rigidbody heroRb;
-  private int speed = 500;
-  private int jumpForce = 200;
-  private bool isJumping;
+  private int speed = 400;
+  private int jumpForce = 500;
+  public bool isJumping;
 
   //Life variables
   private GameObject[] lives;
-  private Transform lifeTrans;
   private Vector3 lifePos;
   private int i;
   public int lifeNum;
+
+  //Script communication
+  private GameInfo gameInfo;
 
     void Start()
     {
      lifeNum = 5;
      lives = GameObject.FindGameObjectsWithTag("Life");
+
      heroRb = GetComponent<Rigidbody>();
     }
 
@@ -55,13 +58,13 @@ public class Hero : MonoBehaviour
      //Display lives below player's name
      for (i = 0; i < lifeNum; i++)
      {
-       lifePos = new Vector3 (0 - 2 * i,18,0);
+       lifePos = new Vector3 (-4 - 2 * i,18,0);
        lives[i].transform.position = lifePos;
      }
     }
 
     //Check if player is touching ground
-    private void OnCollisionEnter(Collision collision)
+    public void OnCollisionEnter(Collision collision)
     {
       if (collision.gameObject.tag == "Ground")
       {
@@ -70,7 +73,7 @@ public class Hero : MonoBehaviour
       }
 
       //Hero loses a life if it touches an enemy without being above it
-      else if (collision.gameObject.tag == "Enemy" && lifeNum > 0)
+      if (collision.gameObject.tag == "Enemy" && lifeNum > 0 && !isJumping)
       {
        lives[i-1].gameObject.SetActive(false);
        lifeNum--;
