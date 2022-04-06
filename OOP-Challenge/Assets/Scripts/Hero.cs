@@ -62,13 +62,13 @@ public class Hero : MonoBehaviour
      //Display lives below player's name
      for (i = 0; i < lifeNum; i++)
      {
-       lifePos = new Vector3 (-4 - 2 * i,18,0);
+       lifePos = new Vector3 (-4 - 2 * i,22,0);
        lives[i].transform.position = lifePos;
      }
     }
 
     //Check if player is touching ground
-    public void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision collision)
     {
       if (collision.gameObject.tag == "Ground")
       {
@@ -83,5 +83,16 @@ public class Hero : MonoBehaviour
        lifeNum--;
        Debug.Log("lifeNum = " + lifeNum + ".");
       }
+    }
+
+    //Hero loses a life if it touches an enemy projectile
+    private void OnTriggerEnter(Collider other)
+    {
+     if (other.gameObject.tag == "Projectile" && lifeNum > 0)
+     {
+       lives[i-1].gameObject.SetActive(false);
+       lifeNum--;
+       Debug.Log("lifeNum = " + lifeNum + ".");
+     }
     }
 }

@@ -33,9 +33,7 @@ public class DataPersists : MonoBehaviour
   public float highScoreNum;//The one saved in JSON
   private TextMeshProUGUI highScoreNumText;//The JSON number displayed in Level
 
-
   public float difficulty;
-
 
     //Singleton
     private void Awake()

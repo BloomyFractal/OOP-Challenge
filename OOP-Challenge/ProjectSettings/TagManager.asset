@@ -9,6 +9,7 @@ TagManager:
   - Life
   - Hero
   - DeadEnemy
+  - Projectile
   layers:
   - Default
   - TransparentFX

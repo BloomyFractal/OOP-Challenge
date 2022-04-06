@@ -6,6 +6,8 @@ public class Enemy : MonoBehaviour
 {
   //Enemy variables
   public Transform enemyTrans;
+  public float xSpeed;
+  public float ySpeed;
 
   //Hero variables
   public Transform heroTrans;
@@ -27,30 +29,40 @@ public class Enemy : MonoBehaviour
 
     }
 
-    public virtual void defineDist()
+    public void defineDist()
     {
      yDist = heroTrans.position.y - enemyTrans.position.y;
     }
 
+    public virtual void Move()
+    {
+
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
-      Debug.Log("yDIST IS " + yDist + ".");
-      Debug.Log("collision.gameObject.tag IS " + collision.gameObject.tag + ".");
-      Debug.Log("hero.isJumping IS " + hero.isJumping + ".");
-
       //Defeat enemy by jumping on it and gain score
-      if (collision.gameObject.tag == "Hero" && yDist > 0.1f && hero.isJumping && enemyTrans.localScale.y > 0.25f)
+      if (collision.gameObject.tag == "Hero" && yDist > 0.1f && hero.isJumping && enemyTrans.localScale.y > 0.3f)
       {
         StartCoroutine(removeEnemy());
-        Debug.Log("The enemy shall be destroyed.");
         gameInfo.score += 1000;
 
         gameObject.tag = "DeadEnemy";
         Debug.Log("gameObject.tag = " + gameObject.tag + ".");
 
+        if (gameObject.tag == "DeadEnemy")
+        {
+         xSpeed = 0;
+         ySpeed = 0;
+
+         Debug.Log("xSpeed = " + xSpeed + ".");
+         Debug.Log("ySpeed = " + ySpeed + ".");
+        }
+
         //Make enemy smaller once jumped on
-        Vector3 scaleChange = new Vector3(0,0.25f,0);
+        Vector3 scaleChange = new Vector3(0,0.2f,0);
         enemyTrans.localScale -= scaleChange;
+        Debug.Log("enemyTrans.localScale = " + enemyTrans.localScale + ".");
 
         //Make hero bounce on enemy
         hero.heroRb.AddForce(Vector3.up * hero.jumpForce/2,ForceMode.Impulse);
@@ -59,7 +71,7 @@ public class Enemy : MonoBehaviour
 
     IEnumerator removeEnemy()
     {
-      yield return new WaitForSeconds(20);
+      yield return new WaitForSeconds(3);
       gameObject.SetActive(false);
     }
 }
