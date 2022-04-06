@@ -30,7 +30,7 @@ public class FlyingEnemy : Enemy
      transform.Translate(Vector3.right * xSpeed * dataPersists.difficulty * Time.deltaTime);
 
      //Y axis movement
-     transform.Translate(Vector3.up * ySpeed * dataPersists.difficulty * Mathf.Sin(Time.time * 1.4f) * Time.deltaTime);
+     transform.Translate(Vector3.up * ySpeed * dataPersists.difficulty * Mathf.Sin(Time.time * 1.5f) * Time.deltaTime);
 
      //Stop shooting if enemy is defeated
      if (gameObject.tag == "DeadEnemy")
