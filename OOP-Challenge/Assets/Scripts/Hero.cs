@@ -21,7 +21,6 @@ public class Hero : MonoBehaviour
 
   //Script communication
   private GameInfo gameInfo;
-  public Enemy enemy;
 
   //Physics variables
   private float gravityModifier = 1.7f;
@@ -62,7 +61,7 @@ public class Hero : MonoBehaviour
      //Display lives below player's name
      for (i = 0; i < lifeNum; i++)
      {
-       lifePos = new Vector3 (-4 - 2 * i,22,0);
+       lifePos = new Vector3 (200 + 40 * i,720,0);
        lives[i].transform.position = lifePos;
      }
     }

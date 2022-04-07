@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class GameInfo : MonoBehaviour
 {
-  //HUD variables
+  //Time variables
   public float time;
   private TextMeshProUGUI timeText;
 
@@ -22,7 +23,6 @@ public class GameInfo : MonoBehaviour
 
     void Start()
     {
-
      //Scripts Reference
      dataPersists = GameObject.Find("Data").GetComponent<DataPersists>();
      hero = GameObject.Find("Hero").GetComponent<Hero>();
@@ -42,22 +42,21 @@ public class GameInfo : MonoBehaviour
 
     void Update()
     {
-     //Display time
-     timeText.text = "Time: " + time.ToString("000");
-     if (time > 0)
-     {
-       time -= Time.deltaTime;
-     }
+      //Display time
+      timeText.text = "Time: " + time.ToString("000");
+      if (time > 0)
+      {
+        time -= Time.deltaTime;
+      }
 
-     //Display Score
-     scoreText.text = "Score: " + score.ToString("0 000 000");
+      //Display Score
+      scoreText.text = "Score: " + score.ToString("0 000 000");
 
-     //Kill hero if time runs out
-     if (time <= 0)
-     {
-       hero.lifeNum = 0;
-       Debug.Log("lifeNum = " + hero.lifeNum + ".");
-     }
-
+      //Kill hero if time runs out
+      if (time <= 0)
+      {
+        hero.lifeNum = 0;
+        Debug.Log("lifeNum = " + hero.lifeNum + ".");
+      }
     }
 }

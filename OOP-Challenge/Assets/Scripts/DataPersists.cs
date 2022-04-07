@@ -114,7 +114,6 @@ public class DataPersists : MonoBehaviour
 
     public void SetPlayerName()
     {
-
       playerName = inputField.text;
       Debug.Log("playerName = " + playerName + "." );
       Debug.Log("nameLength = " + nameLength + "." );
