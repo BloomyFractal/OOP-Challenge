@@ -18,7 +18,7 @@ public class CamFollowHero : MonoBehaviour
 
     private void camFollowHero()
     {
-     Vector3 offset = new Vector3 (-10,4,20);
+     Vector3 offset = new Vector3 (-10,6,20);
      Vector3 heroPos = new Vector3 (heroTrans.position.x,heroTrans.position.y,heroTrans.position.z);
 
      transform.position = heroPos + offset;

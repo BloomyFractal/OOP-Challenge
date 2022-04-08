@@ -99,7 +99,7 @@ public class OptionsUI : MonoBehaviour
 
      else if ((navArrow.position.y < arrowFacesHard.y + (verticalButtonGap * 0.10f) && navArrow.position.y > arrowFacesHard.y - (verticalButtonGap * 0.10f) && Input.GetKeyDown(KeyCode.Return)))
      {
-      dataPersists.difficulty = 1.5f;
+      dataPersists.difficulty = 2;
       Debug.Log("difficulty = " + dataPersists.difficulty + ".");
      }
 
