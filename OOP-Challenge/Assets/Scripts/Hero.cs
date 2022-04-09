@@ -61,7 +61,7 @@ public class Hero : MonoBehaviour
      //Display lives below player's name
      for (i = 0; i < lifeNum; i++)
      {
-       lifePos = new Vector3 (200 + 40 * i,720,0);
+       lifePos = new Vector3 (0 + 40 * i,0,0);
        lives[i].transform.position = lifePos;
      }
     }
