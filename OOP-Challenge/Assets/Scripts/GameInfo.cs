@@ -64,7 +64,7 @@ public class GameInfo : MonoBehaviour
 
      //Define Time variables
      Time.timeScale = 1;
-     time = 20;
+     time = 30;
      timeText = GameObject.Find("Time").GetComponent<TextMeshProUGUI>();
 
      //Define Player variables
@@ -203,7 +203,8 @@ public class GameInfo : MonoBehaviour
      }
     }
 
-    private void CheckForScore()
+    //Click Functions
+    public void CheckForScore()
     {
      //Save data in case of new high score
      if (totalScore > dataPersists.highScoreNum)
@@ -215,6 +216,14 @@ public class GameInfo : MonoBehaviour
 
       Debug.Log("High Score = " + dataPersists.highScoreNum + ".");
       Debug.Log("Best Player is " + dataPersists.playerName + ".");
+
+      //Return to Title screen
+      SceneManager.LoadScene("TitleScreen");
      }
+    }
+
+    public void Retry()
+    {
+     SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

@@ -28,11 +28,10 @@ public class Hero : MonoBehaviour
     void Start()
     {
      //Lives definitions
-     lifeNum = 5;
-     //lives = GameObject.FindGameObjectsWithTag("Life").GetComponent<RectTransform>();
+     lifeNum = 2;
 
      //Physics definitions
-     Physics.gravity = new Vector3(0,-12,0);
+     Physics.gravity = new Vector3 (0,-12,0);
      Physics.gravity *= gravityModifier;
     }
 
