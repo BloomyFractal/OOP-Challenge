@@ -54,6 +54,9 @@ public class GameInfo : MonoBehaviour
   private Vector2 arrowFacesRetry;
   private Vector2 arrowFacesReturn;
 
+  //Game Over variables
+  public GameObject gameOverPanel;
+
 
     void Start()
     {
@@ -64,7 +67,7 @@ public class GameInfo : MonoBehaviour
 
      //Define Time variables
      Time.timeScale = 1;
-     time = 30;
+     time = 5;
      timeText = GameObject.Find("Time").GetComponent<TextMeshProUGUI>();
 
      //Define Player variables
@@ -119,12 +122,13 @@ public class GameInfo : MonoBehaviour
       }
 
       //Finish Options Set up
-      if (finishOptPanel.activeInHierarchy)
+      if (finishOptPanel.activeInHierarchy || gameOverPanel.activeInHierarchy)
       {
        navArrow = GameObject.Find("NavigationArrow").GetComponent<RectTransform>();
       }
 
       LevelEnd();
+      GameOver();
     }
 
     private void LevelEnd()
@@ -203,6 +207,44 @@ public class GameInfo : MonoBehaviour
      }
     }
 
+    private void GameOver()
+    {
+     if (hero.lifeNum == 0)
+     {
+       //Stop time
+       Time.timeScale = 0;
+
+       //Summon the dreadful Game Over screen
+       gameOverPanel.SetActive(true);
+
+       //Navigate between "Retry" and "Return to Title Screen"
+       //Downward
+       if (navArrow.anchoredPosition == arrowFacesRetry && Input.GetKeyDown(KeyCode.DownArrow))
+       {
+        navArrow.anchoredPosition = arrowFacesReturn;
+       }
+
+       //Upward
+       if (navArrow.anchoredPosition == arrowFacesReturn && Input.GetKeyDown(KeyCode.UpArrow))
+       {
+        navArrow.anchoredPosition = arrowFacesRetry;
+       }
+
+       //Reset level if "Retry" is selected and ReturnKey is pressed
+       if (navArrow.anchoredPosition == arrowFacesRetry && Input.GetKeyDown(KeyCode.Return))
+       {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+       }
+
+       //Back to Title Screen
+       if (navArrow.anchoredPosition == arrowFacesReturn && Input.GetKeyDown(KeyCode.Return))
+       {
+        TitleScreen();
+       }
+
+     }
+    }
+
     //Click Functions
     public void CheckForScore()
     {
@@ -222,8 +264,15 @@ public class GameInfo : MonoBehaviour
      }
     }
 
+    //Restart level from the beginning
     public void Retry()
     {
      SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    //Back to Title Screen
+    public void TitleScreen()
+    {
+      SceneManager.LoadScene("TitleScreen");
     }
 }
