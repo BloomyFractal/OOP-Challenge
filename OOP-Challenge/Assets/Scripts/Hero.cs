@@ -14,8 +14,8 @@ public class Hero : MonoBehaviour
   public bool isJumping;
 
   //Life variables
-  private GameObject[] lives;
-  private Vector3 lifePos;
+  public RectTransform[] lives;
+  private Vector2 lifePos;
   private int i;
   public int lifeNum;
 
@@ -27,9 +27,11 @@ public class Hero : MonoBehaviour
 
     void Start()
     {
-     lifeNum = 2;
-     lives = GameObject.FindGameObjectsWithTag("Life");
+     //Lives definitions
+     lifeNum = 5;
+     //lives = GameObject.FindGameObjectsWithTag("Life").GetComponent<RectTransform>();
 
+     //Physics definitions
      Physics.gravity = new Vector3(0,-12,0);
      Physics.gravity *= gravityModifier;
     }
@@ -62,8 +64,8 @@ public class Hero : MonoBehaviour
      //Display lives below player's name
      for (i = 0; i < lifeNum; i++)
      {
-       lifePos = new Vector3 (10 + 40 * i,10,0);
-       lives[i].transform.position = lifePos;
+       lifePos = new Vector2 (-450 + 40 * i,-80);
+       lives[i].anchoredPosition = lifePos;
      }
     }
 

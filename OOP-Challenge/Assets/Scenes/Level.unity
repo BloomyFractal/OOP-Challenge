@@ -2269,6 +2269,12 @@ MonoBehaviour:
   heroRb: {fileID: 1216170183}
   jumpForce: 10
   isJumping: 0
+  lives:
+  - {fileID: 1292471291}
+  - {fileID: 544110521}
+  - {fileID: 446849927}
+  - {fileID: 1067921213}
+  - {fileID: 650627617}
   lifeNum: 5
 --- !u!54 &1216170183
 Rigidbody:
