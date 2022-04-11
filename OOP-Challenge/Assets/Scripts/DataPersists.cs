@@ -28,17 +28,13 @@ public class DataPersists : MonoBehaviour
   public string playerName;
 
   public string highScorePlayer;//The one saved in JSON
-  private TextMeshProUGUI highScorePlayerText;//The JSON name displayed in Level
-
   public float highScoreNum;//The one saved in JSON
-  private TextMeshProUGUI highScoreNumText;//The JSON number displayed in Level
 
   public float difficulty;
 
     //Singleton
     private void Awake()
     {
-
      if (dataPersists != null)
       {
         Destroy(gameObject);
@@ -47,7 +43,6 @@ public class DataPersists : MonoBehaviour
 
       dataPersists = this;
       DontDestroyOnLoad(gameObject);
-
     }
 
     void Start()
@@ -70,6 +65,11 @@ public class DataPersists : MonoBehaviour
        nameLength = inputField.text.Length;
 
        nameLengthText.text = "Name length: " + nameLength;
+
+       //Name Warnings
+       nameTooShortWarning = GameObject.Find("NameTooShortWarning").GetComponent<TextMeshProUGUI>();
+
+       nameTooLongWarning = GameObject.Find("NameTooLongWarning").GetComponent<TextMeshProUGUI>();
 
        //Show Short Warning if name is too short and disable Submit
        if (inputField.text.Length < 2 && nameTooLongWarning != null)
@@ -96,27 +96,46 @@ public class DataPersists : MonoBehaviour
 
          submit.enabled = true;
        }
-
-       //Name Warnings
-       nameTooShortWarning = GameObject.Find("NameTooShortWarning").GetComponent<TextMeshProUGUI>();
-
-       nameTooLongWarning = GameObject.Find("NameTooLongWarning").GetComponent<TextMeshProUGUI>();
-      }
-      //Level definitions
-      if (SceneManager.GetActiveScene().name == "Level")
-      {
-       //High Score definitions
-       highScoreNumText = GameObject.Find("HighScore").GetComponent<TextMeshProUGUI>();
-
-       highScoreNumText.text = "High Score: " + highScoreNum.ToString("0 000 000");
       }
     }
 
+    //Data persistence between scenes
     public void SetPlayerName()
     {
       playerName = inputField.text;
       Debug.Log("playerName = " + playerName + "." );
-      Debug.Log("nameLength = " + nameLength + "." );
       SceneManager.LoadScene("Level");
+    }
+
+    //Data persistence between sessions
+    [System.Serializable]
+    class SaveData
+    {
+     public float highScoreNum;
+     public string highScorePlayer;
+    }
+
+    public void SaveNameAndScore()
+    {
+      SaveData data = new SaveData();
+      data.highScoreNum = highScoreNum;
+      data.highScorePlayer = playerName;
+
+      string json = JsonUtility.ToJson(data);
+
+      File.WriteAllText(Application.persistentDataPath + "/savefile.json",json);
+    }
+
+    public void LoadNameAndScore()
+    {
+      string path = Application.persistentDataPath + "/savefile.json";
+      if (File.Exists(path))
+      {
+        string json = File.ReadAllText(path);
+        SaveData data = JsonUtility.FromJson<SaveData>(json);
+
+        highScoreNum = data.highScoreNum;
+        highScorePlayer = data.highScorePlayer;
+      }
     }
 }

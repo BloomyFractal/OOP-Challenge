@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class GameInfo : MonoBehaviour
@@ -19,6 +20,9 @@ public class GameInfo : MonoBehaviour
   //Current score
   public float score;
   private TextMeshProUGUI scoreText;
+
+  //The JSON highscore and name showed in Level
+  private TextMeshProUGUI highScoreText;
 
   //Script communication
   private DataPersists dataPersists;
@@ -46,6 +50,10 @@ public class GameInfo : MonoBehaviour
   //Finish Options Panel variables
   public GameObject finishOptPanel;
 
+  public RectTransform navArrow;
+  private Vector2 arrowFacesRetry;
+  private Vector2 arrowFacesReturn;
+
 
     void Start()
     {
@@ -55,7 +63,8 @@ public class GameInfo : MonoBehaviour
      heroTrans = GameObject.Find("Hero").GetComponent<Transform>();
 
      //Define Time variables
-     time = 100;
+     Time.timeScale = 1;
+     time = 20;
      timeText = GameObject.Find("Time").GetComponent<TextMeshProUGUI>();
 
      //Define Player variables
@@ -71,8 +80,20 @@ public class GameInfo : MonoBehaviour
 
      //Define Flag
      finishFlagTrans = GameObject.Find("Flagcolumn").GetComponent<Transform>();
-    }
 
+     //Finish Options Panel Arrow positions
+     arrowFacesRetry = new Vector2(navArrow.anchoredPosition.x+0,navArrow.anchoredPosition.y+0);
+
+     arrowFacesReturn = new Vector2(navArrow.anchoredPosition.x+0,navArrow.anchoredPosition.y-200);
+
+     navArrow.anchoredPosition = arrowFacesRetry;
+
+     //Data
+     dataPersists.LoadNameAndScore();
+
+     Debug.Log("High Score = " + dataPersists.highScoreNum + ".");
+     Debug.Log("Best Player is " + dataPersists.playerName + ".");
+   }
     void Update()
     {
       //Display time
@@ -85,11 +106,22 @@ public class GameInfo : MonoBehaviour
       //Display Score
       scoreText.text = "Score: " + score.ToString("0 000 000");
 
+      //Display High Score
+      highScoreText = GameObject.Find("HighScore").GetComponent<TextMeshProUGUI>();
+
+      highScoreText.text = "High Score: " + dataPersists.highScorePlayer + " " + dataPersists.highScoreNum.ToString("0 000 000");
+
       //Kill hero if time runs out
       if (time <= 0)
       {
         hero.lifeNum = 0;
         Debug.Log("lifeNum = " + hero.lifeNum + ".");
+      }
+
+      //Finish Options Set up
+      if (finishOptPanel.activeInHierarchy)
+      {
+       navArrow = GameObject.Find("NavigationArrow").GetComponent<RectTransform>();
       }
 
       LevelEnd();
@@ -100,7 +132,10 @@ public class GameInfo : MonoBehaviour
      if (heroTrans.position.x < finishFlagTrans.position.x)
      {
        //Disable enemies
-       enemies.SetActive(false);
+       if (enemies != null)
+       {
+         enemies.SetActive(false);
+       }
 
        //Stop time
        Time.timeScale = 0;
@@ -134,6 +169,52 @@ public class GameInfo : MonoBehaviour
          finishOptPanel.SetActive(true);
        }
 
+       //Finish Options Set up
+       if (finishOptPanel.activeInHierarchy)
+       {
+        navArrow = GameObject.Find("NavigationArrow").GetComponent<RectTransform>();
+
+        //Navigate between "Retry" and "Return to Title Screen"
+        if (navArrow.anchoredPosition == arrowFacesRetry && Input.GetKeyDown(KeyCode.DownArrow))
+        {
+         navArrow.anchoredPosition = arrowFacesReturn;
+        }
+
+        if (navArrow.anchoredPosition == arrowFacesReturn && Input.GetKeyDown(KeyCode.UpArrow))
+        {
+         navArrow.anchoredPosition = arrowFacesRetry;
+        }
+
+        //Reset level if "Retry" is selected and ReturnKey is pressed
+        if (navArrow.anchoredPosition == arrowFacesRetry && Input.GetKeyDown(KeyCode.Return))
+        {
+         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+
+        //Save data and return to title screen if Return button is selected and return key is pressed
+        if (navArrow.anchoredPosition == arrowFacesReturn && Input.GetKeyDown(KeyCode.Return))
+        {
+         CheckForScore();
+
+         //Return to Title screen
+         SceneManager.LoadScene("TitleScreen");
+        }
+       }
+     }
+    }
+
+    private void CheckForScore()
+    {
+     //Save data in case of new high score
+     if (totalScore > dataPersists.highScoreNum)
+     {
+      dataPersists.highScoreNum = totalScore;
+      dataPersists.highScorePlayer = dataPersists.playerName;
+
+      dataPersists.SaveNameAndScore();
+
+      Debug.Log("High Score = " + dataPersists.highScoreNum + ".");
+      Debug.Log("Best Player is " + dataPersists.playerName + ".");
      }
     }
 }

@@ -27,9 +27,10 @@ public class Hero : MonoBehaviour
 
     void Start()
     {
-     lifeNum = 5;
+     lifeNum = 2;
      lives = GameObject.FindGameObjectsWithTag("Life");
 
+     Physics.gravity = new Vector3(0,-12,0);
      Physics.gravity *= gravityModifier;
     }
 
@@ -61,7 +62,7 @@ public class Hero : MonoBehaviour
      //Display lives below player's name
      for (i = 0; i < lifeNum; i++)
      {
-       lifePos = new Vector3 (0 + 40 * i,0,0);
+       lifePos = new Vector3 (10 + 40 * i,10,0);
        lives[i].transform.position = lifePos;
      }
     }
