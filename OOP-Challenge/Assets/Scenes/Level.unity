@@ -1640,7 +1640,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyTrans: {fileID: 693022699}
-  xSpeed: 2
+  xSpeed: 1
   ySpeed: 3
   heroTrans: {fileID: 1216170181}
   yDist: 0
@@ -3451,6 +3451,10 @@ PrefabInstance:
       value: ChasingEnemy
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 5d90ddd3d8aae0a4294d8f0ce70ae267, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5d90ddd3d8aae0a4294d8f0ce70ae267, type: 3}
       propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
@@ -3493,7 +3497,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyTrans: {fileID: 1467215539}
-  xSpeed: 2
+  xSpeed: 1
   ySpeed: 0
   heroTrans: {fileID: 1216170181}
   yDist: 0
