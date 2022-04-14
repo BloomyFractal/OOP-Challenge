@@ -57,6 +57,13 @@ public class GameInfo : MonoBehaviour
   //Game Over variables
   public GameObject gameOverPanel;
 
+  //Pause variables
+  public GameObject pausePanel;
+  public RectTransform pauseNavArrow;
+
+  private Vector2 arrowFacesResume;
+  private Vector2 arrowFacesPauseReturn;
+  private Vector2 arrowMovesPause;
 
     void Start()
     {
@@ -84,18 +91,31 @@ public class GameInfo : MonoBehaviour
      //Define Flag
      finishFlagTrans = GameObject.Find("Flagcolumn").GetComponent<Transform>();
 
+     //Definitions of arrows
+     navArrow.anchoredPosition = new Vector2(235,450);
+
+     pauseNavArrow.anchoredPosition = new Vector2(235,550);
+
      //Finish Options Panel Arrow positions
      arrowFacesRetry = new Vector2(navArrow.anchoredPosition.x+0,navArrow.anchoredPosition.y+0);
 
      arrowFacesReturn = new Vector2(navArrow.anchoredPosition.x+0,navArrow.anchoredPosition.y-200);
-
-     navArrow.anchoredPosition = arrowFacesRetry;
 
      //Data
      dataPersists.LoadNameAndScore();
 
      Debug.Log("High Score = " + dataPersists.highScoreNum + ".");
      Debug.Log("Best Player is " + dataPersists.playerName + ".");
+
+     //Display High Score
+     highScoreText = GameObject.Find("HighScore").GetComponent<TextMeshProUGUI>();
+
+     highScoreText.text = "High Score: " + dataPersists.highScorePlayer + " " + dataPersists.highScoreNum.ToString("0 000 000");
+
+     //Pause Menu definitions
+     arrowFacesResume = new Vector2(pauseNavArrow.anchoredPosition.x+0,pauseNavArrow.anchoredPosition.y+0);
+
+     arrowFacesPauseReturn = new Vector2(pauseNavArrow.anchoredPosition.x+0,pauseNavArrow.anchoredPosition.y-300);
    }
     void Update()
     {
@@ -109,11 +129,6 @@ public class GameInfo : MonoBehaviour
       //Display Score
       scoreText.text = "Score: " + score.ToString("0 000 000");
 
-      //Display High Score
-      highScoreText = GameObject.Find("HighScore").GetComponent<TextMeshProUGUI>();
-
-      highScoreText.text = "High Score: " + dataPersists.highScorePlayer + " " + dataPersists.highScoreNum.ToString("0 000 000");
-
       //Kill hero if time runs out
       if (time <= 0)
       {
@@ -121,14 +136,61 @@ public class GameInfo : MonoBehaviour
         Debug.Log("lifeNum = " + hero.lifeNum + ".");
       }
 
-      //Finish Options Set up
+      //Finish Options and Game Over Panels Arrow Set up
       if (finishOptPanel.activeInHierarchy || gameOverPanel.activeInHierarchy)
       {
        navArrow = GameObject.Find("NavigationArrow").GetComponent<RectTransform>();
       }
 
+      Pause();
       LevelEnd();
       GameOver();
+    }
+
+    private void Pause()
+    {
+     if (!finishPanel.activeInHierarchy && !finishOptPanel.activeInHierarchy && !gameOverPanel.activeInHierarchy && Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape))
+     {
+       //Stop time and display Pause Menu
+       Time.timeScale = 0;
+       pausePanel.SetActive(true);
+     }
+       //Get the component so that it can be used
+       if (pausePanel.activeInHierarchy)
+       {
+         pauseNavArrow = GameObject.Find("PauseNavArrow").GetComponent<RectTransform>();
+       }
+
+       //Navigation between buttons
+       //Downward
+       if (pauseNavArrow.anchoredPosition == arrowFacesResume && Input.GetKeyDown(KeyCode.DownArrow))
+       {
+         pauseNavArrow.anchoredPosition = arrowFacesPauseReturn;
+
+         Debug.Log("pauseNavArrow.anchoredPosition = " + pauseNavArrow.anchoredPosition + ".");
+       }
+
+       //Upward
+       if (pauseNavArrow.anchoredPosition == arrowFacesPauseReturn && Input.GetKeyDown(KeyCode.UpArrow))
+       {
+         pauseNavArrow.anchoredPosition = arrowFacesResume;
+
+         Debug.Log("pauseNavArrow.anchoredPosition = " + pauseNavArrow.anchoredPosition + ".");
+       }
+
+       //Resume function
+       if (pauseNavArrow.anchoredPosition == arrowFacesResume && Input.GetKeyDown(KeyCode.Return))
+       {
+         //Hide Pause Menu and unstop time
+         pausePanel.SetActive(false);
+         Time.timeScale = 1;
+       }
+
+       //Return to Title function
+       if (pauseNavArrow.anchoredPosition == arrowFacesReturn && Input.GetKeyDown(KeyCode.Return))
+       {
+         SceneManager.LoadScene("TitleScreen");
+       }
     }
 
     private void LevelEnd()
@@ -262,6 +324,13 @@ public class GameInfo : MonoBehaviour
       //Return to Title screen
       SceneManager.LoadScene("TitleScreen");
      }
+    }
+
+    public void Resume()
+    {
+     //Make time flow and hide Pause Menu
+     Time.timeScale = 1;
+     pausePanel.SetActive(false);
     }
 
     //Restart level from the beginning
