@@ -7,7 +7,7 @@ public class OptionsUI : MonoBehaviour
 {
   //Arrow variables
   private Transform navArrow;
-  private Vector3 arrowMovePanels = new Vector3(0,10,0);
+  private Vector3 arrowMovePanels = new Vector3(0,5,0);
 
   //Positions close to Options text and buttons
   private Vector3 arrowFacesDiff = new Vector3(8,6,0);
@@ -25,7 +25,7 @@ public class OptionsUI : MonoBehaviour
 
     void Start()
     {
-    //Arrow
+    //Arrow's default position
      navArrow = GameObject.Find("NavigationArrow").GetComponent<Transform>();
      navArrow.position = arrowFacesDiff;
 
