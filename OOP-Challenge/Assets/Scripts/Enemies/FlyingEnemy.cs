@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// INHERITANCE
+
 public class FlyingEnemy : Enemy
 {
   //Projectile variables
@@ -24,6 +26,7 @@ public class FlyingEnemy : Enemy
      Move();
     }
 
+    // POLYMORPHISM
     public override void Move()
     {
      //X axis movement

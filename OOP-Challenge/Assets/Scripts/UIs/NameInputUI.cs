@@ -29,6 +29,7 @@ public class NameInputUI : MonoBehaviour
 
     void Update()
     {
+     // ABSTRACTION
      ArrowFunctions();
     }
 

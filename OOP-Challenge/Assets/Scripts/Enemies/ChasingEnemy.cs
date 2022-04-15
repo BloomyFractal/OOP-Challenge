@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// INHERITANCE
+
 public class ChasingEnemy : Enemy
 {
   //Script communication
@@ -18,6 +20,7 @@ public class ChasingEnemy : Enemy
      Move();
     }
 
+    // POLYMORPHISM
     public override void Move()
     {
      //Rotate toward hero

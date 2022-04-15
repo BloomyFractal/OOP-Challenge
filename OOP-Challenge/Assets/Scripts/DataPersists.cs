@@ -9,7 +9,8 @@ using System.IO;
 
 public class DataPersists : MonoBehaviour
 {
-  public DataPersists dataPersists;
+  // ENCAPSULATION
+  public DataPersists dataPersists { get; private set; }
 
   public static TMP_InputField inputField;
 

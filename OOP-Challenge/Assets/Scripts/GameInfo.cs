@@ -5,6 +5,8 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 
+//Link to GitHub repository: https://github.com/BloomyFractal/OOP-Challenge
+
 public class GameInfo : MonoBehaviour
 {
   //Time variables

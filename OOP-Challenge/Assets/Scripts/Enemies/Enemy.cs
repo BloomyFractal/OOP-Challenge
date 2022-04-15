@@ -34,6 +34,7 @@ public class Enemy : MonoBehaviour
      yDist = heroTrans.position.y - enemyTrans.position.y;
     }
 
+    // POLYMORPHISM
     public virtual void Move()
     {
 

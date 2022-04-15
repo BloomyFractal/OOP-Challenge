@@ -38,6 +38,7 @@ public class HowToPlayUI : MonoBehaviour
 
     void Update()
     {
+     // ABSTRACTION
      ArrowFunctions();
     }
 

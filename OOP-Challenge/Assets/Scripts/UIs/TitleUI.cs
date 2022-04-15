@@ -26,6 +26,7 @@ public class TitleUI : MonoBehaviour
 
     void Update()
     {
+     // ABSTRACTION
      ArrowFunctions();
     }
 
