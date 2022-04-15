@@ -74,7 +74,7 @@ public class GameInfo : MonoBehaviour
 
      //Define Time variables
      Time.timeScale = 1;
-     time = 100;
+     time = 200;
      timeText = GameObject.Find("Time").GetComponent<TextMeshProUGUI>();
 
      //Define Player variables

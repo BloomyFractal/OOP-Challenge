@@ -7,7 +7,7 @@ public class OptionsUI : MonoBehaviour
 {
   //Arrow variables
   private Transform navArrow;
-  private Vector3 arrowMovePanels = new Vector3(0,5,0);
+  private Vector3 arrowMovePanels = new Vector3(0,10,0);
 
   //Positions close to Options text and buttons
   private Vector3 arrowFacesDiff = new Vector3(8,6,0);
@@ -28,6 +28,8 @@ public class OptionsUI : MonoBehaviour
     //Arrow's default position
      navArrow = GameObject.Find("NavigationArrow").GetComponent<Transform>();
      navArrow.position = arrowFacesDiff;
+     Debug.Log("navArrow.position = " + navArrow.position + ".");
+     Debug.Log("arrowFacesDiff = " + arrowFacesDiff + ".");
 
      //Data
      dataPersists = GameObject.Find("Data").GetComponent<DataPersists>();
@@ -44,11 +46,13 @@ public class OptionsUI : MonoBehaviour
     private void ArrowFunctions()
     {
      //Choose between panels and back
+     //Downward
      if (navArrow.position == arrowFacesDiff && Input.GetKeyDown(KeyCode.DownArrow))
      {
        navArrow.position -= arrowMovePanels;
      }
 
+     //Upward
      if (navArrow.position == arrowFacesBack && Input.GetKeyDown(KeyCode.UpArrow))
      {
        navArrow.position += arrowMovePanels;
@@ -68,14 +72,14 @@ public class OptionsUI : MonoBehaviour
 
      //Navigate within Difficulty Panel
      //Go upward
-     if (navArrow.position.x != arrowFacesDiff.x && navArrow.position.y < arrowFacesEasy.y - 0.1f && Input.GetKeyDown(KeyCode.UpArrow))
+     if (navArrow.position.x == arrowFacesNormal.x && navArrow.position.y < arrowFacesEasy.y + 0.1f && Input.GetKeyDown(KeyCode.UpArrow))
      {
       navArrow.position += arrowMoveDifficulties;
       Debug.Log("navArrow.position = " + navArrow.position + ".");
      }
 
      //Go downward
-     if (navArrow.position.x != arrowFacesDiff.x && navArrow.position.y > arrowFacesHard.y + 0.1f && Input.GetKeyDown(KeyCode.DownArrow))
+     if (navArrow.position.x == arrowFacesNormal.x && navArrow.position.y > arrowFacesHard.y - 0.1f && Input.GetKeyDown(KeyCode.DownArrow))
      {
       navArrow.position -= arrowMoveDifficulties;
       Debug.Log("navArrow.position = " + navArrow.position + ".");
